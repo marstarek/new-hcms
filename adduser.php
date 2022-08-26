@@ -1,6 +1,21 @@
 <?php
 session_start();
-$error_field = [];
+
+$conn = mysqli_connect('localhost', 'root', null, 'hr-01');
+
+if (!$conn) {
+    echo mysqli_connect_error();
+    exit();
+}
+// $userID = $_POST['userID'];
+$sessionUserID = isset($_SESSION["ID"]) ? $_SESSION["ID"] : -1;
+$query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1";
+// echo $query;
+$result = mysqli_query($conn, $query);
+if ($result->num_rows !== 1) {
+    echo "Un Authorized !";
+    exit();
+}$error_field = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validation
     // var_dump($_POST);

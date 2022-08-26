@@ -123,37 +123,37 @@ function enable(obj) {
 }
 
 
-// $(document).ready(function () {
+$(document).ready(function () {
 
-//      $(".modal-body .send-comment-holder").css("display","none");
+     $(".modal-body .send-comment-holder").css("display","none");
 
-//      $(".reject-request").on("click", function () {
-//           $(".modal-body .send-comment-holder").css("display", "block");
-//           $(this).prop("disabled", true);
-//           $(".accept-request").prop("disabled", true);
+     $(".reject-request").on("click", function () {
+          $(".modal-body .send-comment-holder").css("display", "block");
+          $(this).prop("disabled", true);
+          $(".accept-request").prop("disabled", true);
 
-//       })
-//      $(".cancel-comment").on("click", function () {
-//           $(".modal-body .send-comment-holder").css("display", "none");
-//           $(".accept-request").prop("disabled", false);
-//           $(".reject-request").prop("disabled", false);
-//       })
-
-
-
-//      $(".emp-cards").find(".emp-card-holder").find(".delete-member-btn").on("click", function () {
-//           console.log($(this).parent().parent());
-//           $(this).parent().parent().remove();
-//      })
-//      $(".add-teammember-btn").on("click", function () { 
-
-// let clonedCard=$(".emp-card-holder").last().clone()
-
-// $(".emp-cards").append(clonedCard)
+      })
+     $(".cancel-comment").on("click", function () {
+          $(".modal-body .send-comment-holder").css("display", "none");
+          $(".accept-request").prop("disabled", false);
+          $(".reject-request").prop("disabled", false);
+      })
 
 
-//      })
+
+     $(".emp-cards").find(".emp-card-holder").find(".delete-member-btn").on("click", function () {
+          console.log($(this).parent().parent());
+          $(this).parent().parent().remove();
+     })
+     $(".add-teammember-btn").on("click", function () { 
+
+let clonedCard=$(".emp-card-holder").last().clone()
+
+$(".emp-cards").append(clonedCard)
+
+
+     })
 
      
-//  })
+ })
 

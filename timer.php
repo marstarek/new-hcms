@@ -132,7 +132,7 @@ session_start();
           <div class="user">
             <div class="user__info d-flex     align-items-center flex-column">
               <div class="user__icon">
-                <img src="images/d0b79558-ebba-48a9-9e2a-e3b07a2b2233.webp" class="w-100" alt="Jeremy Robson" />
+                <img src="images/img.jpg" class="w-100" alt="Jeremy Robson" />
                 <i class="bi bi-camera-fill upload-img"></i>
               </div>
               <div class="user__text">

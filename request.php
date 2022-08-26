@@ -39,7 +39,7 @@
             <a class="nav-link" href="./addEmployee.php">addEmp</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./request.php">request1</a>
+            <a class="nav-link" href="./request.php">requests</a>
           </li>
           <li class="nav-item dropdown bg-dark">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,8 +147,8 @@ Extraordinary
 
     </div>
     <div class="d-flex  py-2 align-items-center justify-content-center">
-      <button class="send-for-approval btn btn-primary download" onclick="takeshot()">send for approval<i class="bi bi-send-fill"></i></button>
-      <!-- <button class="btn btn-success" style="display: none;" onclick="screen(event)">Download your copy <i class="bi bi-download "></i> -->
+      <button class="send-for-approval btn btn-primary download" onclick="send()">send for approval<i class="bi bi-send-fill"></i></button>
+      <button class="btn btn-success" style="display: none;" onclick="screen(event)">Download your copy <i class="bi bi-download "></i>
       </button>
   
      </div>
