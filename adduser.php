@@ -192,10 +192,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </td>
                                 <td class="d-flex user-row-options">
-                                    <button class="btn btn-warning btn-block me-3 edite-user-row "
-                                    onclick="editRow(this)"
+                                    <button class="btn btn-warning btn-block me-3  edite-row-btn "
+                                    onclick=" editRow(this) ">Edit</button>
+
                                     
-                                    >Edite</button>
                                     <button class="btn btn-danger btn-block delete-row-btn " onclick="deleteRow(this)">Delete</button>
                                 </td>
                             </tr>
