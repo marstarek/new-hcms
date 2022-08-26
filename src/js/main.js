@@ -54,19 +54,19 @@ $(document).ready(function () {
       });
   
   // toggle edite user-row  btn 
-  // $(".edite-user-row").on("click", function () {
+  $(".edite-user-row").on("click", function () {
  
 
-  //   if ($(this).hasClass("btn-warning")&&$(this).parent().parent().find("input ,select").attr('disabled')) {
-  //     $(this).removeClass("btn-warning").addClass("btn-success").text("Save");
-  //     $(this).siblings().removeClass("btn-danger").addClass("btn-secondary").text("cancel").addClass("editeing")
-  //       $(this).parent().parent().find("input ,select").removeAttr('disabled');
-  //   } else {
-  //     $(this).addClass("btn-warning").removeClass("btn-success").text("Edite");
-  //     $(this).siblings().addClass("btn-danger").removeClass("btn-secondary").text("Delete").removeClass("editeing")
-  //     $(this).parent().parent().find("input ,select").attr('disabled', true);
-  //   }
-  // })
+    if ($(this).hasClass("btn-warning")&&$(this).parent().parent().find("input ,select").attr('disabled')) {
+      $(this).removeClass("btn-warning").addClass("btn-success").text("Save");
+      $(this).siblings().removeClass("btn-danger").addClass("btn-secondary").text("cancel").addClass("editeing")
+        $(this).parent().parent().find("input ,select").removeAttr('disabled');
+    } else {
+      $(this).addClass("btn-warning").removeClass("btn-success").text("Edite");
+      $(this).siblings().addClass("btn-danger").removeClass("btn-secondary").text("Delete").removeClass("editeing")
+      $(this).parent().parent().find("input ,select").attr('disabled', true);
+    }
+  })
   // 
   
   
@@ -88,41 +88,6 @@ $(document).ready(function () {
             }
           });
           $(that).parent().parent().remove();
-          
-        };
-      });
-      $(function () {
-        editRow = function (that) {
-          const userID = $(that).parent().parent().children().find('.empCode').val();
-          const isActive = $(that).parent().parent().children().find('.isActive').val();
-          const isAdmin = $(that).parent().parent().children().find('.isAdmin').val();
-          const mac = $(that).parent().parent().children().find('.mac').val();
-          const password = $(that).parent().parent().children().find('.password').val();
-          const email = $(that).parent().parent().children().find('.email').val();
-          const EmployeeID = $(that).parent().parent().children().find('.EmployeeID').val();
-          const DisplayName = $(that).parent().parent().children().find('.DisplayName').val();
-          const Username = $(that).parent().parent().children().find('.Username').val();
-          $.ajax({
-            type: "POST",
-            url: "src/ajax/deleteUser.php",
-            data: {
-              'editRow': true,
-              // 'isAdmin' : isAdmin,
-              // 'isActive' : isActive,
-              'mac' : mac,
-              'password' : password,
-              'email' : email,
-              'EmployeeID' : EmployeeID,
-              'DisplayName' : DisplayName,
-              'Username' : Username,
-              'userID' : userID
-            },
-            success: function (response) {
-              console.log(response);
-            }
-          });
-
-          // $(that).parent().parent().remove();
           
         };
       });
