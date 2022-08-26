@@ -104,50 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
 <?php include_once ('includes/header.php')?>
-    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"> <img src="./images/icon.jpg" style="    width: 125px;
-        border-radius: 5px;" alt="icon">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./timer.php">tracker</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./login.php">login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./addemp.php">addEmp</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./request.php">request1</a>
-                    </li>
-                    <li class="nav-item dropdown bg-dark">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="./addemp.php">EMP</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
 
-                </ul>
-
-            </div>
-        </div>
-    </nav> -->
 
     <main>
         <div class="containerx px-5 mx-5">
@@ -235,7 +192,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </td>
                                 <td class="d-flex user-row-options">
-                                    <button class="btn btn-warning btn-block me-3 edite-user-row ">Edite</button>
+                                    <button class="btn btn-warning btn-block me-3 edite-user-row "
+                                    onclick="editRow(this)"
+                                    
+                                    >Edite</button>
                                     <button class="btn btn-danger btn-block delete-row-btn " onclick="deleteRow(this)">Delete</button>
                                 </td>
                             </tr>
