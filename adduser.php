@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     exit();
     // }
     $query =
-        "INSERT INTO `users` (`Username`,`DisplayName`,`email`,`password`,`isAdmin`,isActive,EmployeeID,CreatedBy,CreatedDate) VALUES ('" .
+        "INSERT INTO `users` (`Username`,`DisplayName`,`email`,`password`,`IsDeleted`,`isAdmin`,isActive,EmployeeID,CreatedBy,CreatedDate) VALUES ('" .
         $Username .
         "' , '" .
         $DisplayName .
@@ -55,19 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "','" .
         $password .
         "',
-        '" .
+        0,
+'" .
         $isAdmin .
         "',
-        '" .
+'" .
         $isActive .
         "',
-        '" .
+'" .
         $EmployeeID .
         "',
-        '" .
+'" .
         $_SESSION['ID'] .
         "',
-        '" .
+'" .
         $CreatedDate .
         "')";
     if (mysqli_query($conn, $query)) {
@@ -103,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-<?php include_once ('includes/header.php')?>
+    <?php include_once('includes/header.php') ?>
 
 
     <main>
@@ -143,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo mysqli_connect_error();
                             exit();
                         }
-                        $query = 'SELECT * FROM `users`';
+                        $query = 'SELECT * FROM `users` WHERE IsDeleted <> 1';
                         print $query;
                         $result = mysqli_query($conn, $query);
                         // var_dump($result);
@@ -152,32 +153,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <tr class="add-user-row">
                                 <th scope="row">1</th>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " value="<?= $row['Username'] ?>" type="text" placeholder="<?= $row['Username'] ?>" aria-label="<?= $row['Username'] ?>" >
+                                    <input class="form-control bg-dark  text-white Username " value="<?= $row['Username'] ?>" type="text" placeholder="<?= $row['Username'] ?>" aria-label="<?= $row['Username'] ?>">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " value="<?= $row['DisplayName'] ?>" type="text" placeholder="<?= $row['DisplayName'] ?>" aria-label="<?= $row['DisplayName'] ?>" >
+                                    <input class="form-control bg-dark  text-white DisplayName " value="<?= $row['DisplayName'] ?>" type="text" placeholder="<?= $row['DisplayName'] ?>" aria-label="<?= $row['DisplayName'] ?>">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white  empCode" value="<?= $row['EmployeeID'] ?>" type="text" placeholder="<?= $row['EmployeeID'] ?>" aria-label="<?= $row['EmployeeID'] ?>" >
+                                    <input class="form-control bg-dark  text-white  empCode" value="<?= $row['EmployeeID'] ?>" type="text" placeholder="<?= $row['EmployeeID'] ?>" aria-label="<?= $row['EmployeeID'] ?>">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="<?= $row['Email'] ?>" type="email" type="text" placeholder="<?= $row['Email'] ?>" aria-label="<?= $row['Email'] ?>" >
+                                    <input class="form-control bg-dark text-white Email" value="<?= $row['Email'] ?>" type="email" type="text" placeholder="<?= $row['Email'] ?>" aria-label="<?= $row['Email'] ?>">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="1223445" type="password" type="text" placeholder="password" aria-label="password " >
+                                    <input class="form-control bg-dark text-white password" value="1223445" type="password" type="text" placeholder="password" aria-label="password ">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="as12515asw" type="text" placeholder="mac" aria-label="mac" >
+                                    <input class="form-control bg-dark text-white mac" value="as12515asw" type="text" placeholder="mac" aria-label="mac">
                                 </td>
                                 <td>
                                     <div class="form-check form-switch d-flex justify-content-center">
                                         <input class="form-check-input" value="1" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?= $row['isAdmin'] == 1
                                                                                                                                                 ? 'checked'
-                                                                                                                                                : 'null' ?> >
+                                                                                                                                                : 'null' ?>>
                                     </div>
                                 </td>
                                 <td>
-                                    <select class="form-select" aria-label="Default select example" >
+                                    <select class="form-select" aria-label="Default select example">
                                         <option selected>Open toselect</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -186,17 +187,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </td>
                                 <td>
                                     <div class="form-check form-switch d-flex justify-content-center">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?= $row['IsActive'] == 1
-                                                                                                                                        ? 'checked'
-                                                                                                                                        : 'null' ?> >
+                                        <input class="form-check-input IsActive" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?= $row['IsActive'] == 1
+                                                                                                                                                ? 'checked'
+                                                                                                                                                : 'null' ?>>
                                     </div>
                                 </td>
                                 <td class="d-flex user-row-options">
-                                    <button class="btn btn-warning btn-block me-3  edite-user-btn "
-                                    onclick=" editRow(this) ">Edit</button>
+                                    <button class="btn btn-warning btn-block me-3  edite-user-btn  " data-id=<?= $row['ID'] ?> onclick=" editRow(this) ">Edit</button>
 
 
-                                    <button class="btn btn-danger btn-block delete-row-btn " onclick="deleteRow(this)">Delete</button>
+                                    <button class="btn btn-danger btn-block delete-row-btn" onclick="deleteRow(this)">Delete</button>
                                 </td>
                             </tr>
                         <?php
@@ -207,35 +207,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form method="POST" action="adduser.php" enctype="multipart/form-data">
                                 <th scope="row">2</th>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " type="text" placeholder="user name" aria-label="user name" name="Username" id="Username" placeholder="Username" value="<?= isset(
-                                                                                                                                                                                                                $_POST['Username']
-                                                                                                                                                                                                            )
-                                                                                                                                                                                                                ? $_POST['Username']
-                                                                                                                                                                                                                : '' ?>">
+                                    <input class="form-control bg-dark  text-white " type="text" placeholder="user name" aria-label="user name" name="Username" id="Username" placeholder="Username" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " type="text" placeholder="Display Name" aria-label="Display Name" name="DisplayName" id="DisplayName" placeholder="Display Name" value="<?= isset(
-                                                                                                                                                                                                                                $_POST['DisplayName']
-                                                                                                                                                                                                                            )
-                                                                                                                                                                                                                                ? $_POST['DisplayName']
-                                                                                                                                                                                                                                : '' ?>">
+                                    <input class="form-control bg-dark  text-white " type="text" placeholder="Display Name" aria-label="Display Name" name="DisplayName" id="DisplayName" placeholder="Display Name" value="">
                                 </td>
                                 <td>
                                     <input class="form-control bg-dark  text-white " type="text" placeholder="EmployeeID" aria-label="EmployeeID" name="EmployeeID" id="EmployeeID">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="email" type="text" placeholder="email" aria-label="email" name="email" id="email" placeholder="enter your email" value="<?= isset(
-                                                                                                                                                                                                                        $_POST['email']
-                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                        ? $_POST['email']
-                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="email" type="text" placeholder="email" aria-label="email" name="email" id="email" placeholder="enter your email" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="password" type="text" placeholder="password" aria-label="password " name="password" id="password" placeholder="enter your password" value="<?= isset(
-                                                                                                                                                                                                                                        $_POST['password']
-                                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                                        ? $_POST['password']
-                                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="password" type="text" placeholder="password" aria-label="password " name="password" id="password" placeholder="enter your password" value="">
                                 </td>
                                 <td>
                                     <input class="form-control bg-dark text-white" type="text" placeholder="mac" aria-label="mac">
