@@ -25,7 +25,7 @@
                     </a>
                     <ul class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="./adduser.php">Add user</a></li>
-                        <li><a class="dropdown-item" href="./addemp.php">Add Emp</a></li>
+                        <li><a class="dropdown-item" href="./addEmployee.php">Add Emp</a></li>
                         <li><a class="dropdown-item" href="./request.php">request1</a> </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>

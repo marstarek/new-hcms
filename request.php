@@ -35,7 +35,7 @@
             <a class="nav-link" href="./login.php">login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./addemp.php">addEmp</a>
+            <a class="nav-link" href="./addEmployee.php">addEmp</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./request.php">request1</a>
@@ -45,7 +45,7 @@
               Dropdown
             </a>
             <ul class="dropdown-menu bg-dark text-white" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="./addemp.php">EMP</a></li>
+              <li><a class="dropdown-item" href="./addEmployee.php">EMP</a></li>
               <li><a class="dropdown-item" href="#">Another action</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="#">Something else here</a></li>
