@@ -16,7 +16,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#"> <img src="./images/icon1.jpg" style="    width: 125px;
         border-radius: 5px;" alt=""></a>
@@ -56,8 +57,9 @@
          
       </div>
     </div>
-  </nav>
-  
+  </nav> -->
+  <?php include_once('includes/header.php'); ?>
+
 
   <main >
    <div class="container p-5 text-center ">
@@ -145,8 +147,8 @@ Extraordinary
 
     </div>
     <div class="d-flex  py-2 align-items-center justify-content-center">
-      <button class="send-for-approval btn btn-primary" onclick="send()">send for approval<i class="bi bi-send-fill"></i></button>
-      <button class="btn btn-success" style="display: none;" onclick="screen(event)">Download your copy <i class="bi bi-download "></i>
+      <button class="send-for-approval btn btn-primary download" onclick="takeshot()">send for approval<i class="bi bi-send-fill"></i></button>
+      <!-- <button class="btn btn-success" style="display: none;" onclick="screen(event)">Download your copy <i class="bi bi-download "></i> -->
       </button>
   
      </div>
