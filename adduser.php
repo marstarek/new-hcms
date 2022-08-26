@@ -152,32 +152,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <tr class="add-user-row">
                                 <th scope="row">1</th>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " value="<?= $row['Username'] ?>" type="text" placeholder="<?= $row['Username'] ?>" aria-label="<?= $row['Username'] ?>" disabled>
+                                    <input class="form-control bg-dark  text-white " value="<?= $row['Username'] ?>" type="text" placeholder="<?= $row['Username'] ?>" aria-label="<?= $row['Username'] ?>" >
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " value="<?= $row['DisplayName'] ?>" type="text" placeholder="<?= $row['DisplayName'] ?>" aria-label="<?= $row['DisplayName'] ?>" disabled>
+                                    <input class="form-control bg-dark  text-white " value="<?= $row['DisplayName'] ?>" type="text" placeholder="<?= $row['DisplayName'] ?>" aria-label="<?= $row['DisplayName'] ?>" >
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white  empCode" value="<?= $row['EmployeeID'] ?>" type="text" placeholder="<?= $row['EmployeeID'] ?>" aria-label="<?= $row['EmployeeID'] ?>" disabled>
+                                    <input class="form-control bg-dark  text-white  empCode" value="<?= $row['EmployeeID'] ?>" type="text" placeholder="<?= $row['EmployeeID'] ?>" aria-label="<?= $row['EmployeeID'] ?>" >
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="<?= $row['Email'] ?>" type="email" type="text" placeholder="<?= $row['Email'] ?>" aria-label="<?= $row['Email'] ?>" disabled>
+                                    <input class="form-control bg-dark text-white" value="<?= $row['Email'] ?>" type="email" type="text" placeholder="<?= $row['Email'] ?>" aria-label="<?= $row['Email'] ?>" >
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="1223445" type="password" type="text" placeholder="password" aria-label="password " disabled>
+                                    <input class="form-control bg-dark text-white" value="1223445" type="password" type="text" placeholder="password" aria-label="password " >
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" value="as12515asw" type="text" placeholder="mac" aria-label="mac" disabled>
+                                    <input class="form-control bg-dark text-white" value="as12515asw" type="text" placeholder="mac" aria-label="mac" >
                                 </td>
                                 <td>
                                     <div class="form-check form-switch d-flex justify-content-center">
                                         <input class="form-check-input" value="1" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?= $row['isAdmin'] == 1
                                                                                                                                                 ? 'checked'
-                                                                                                                                                : 'null' ?> disabled>
+                                                                                                                                                : 'null' ?> >
                                     </div>
                                 </td>
                                 <td>
-                                    <select class="form-select" aria-label="Default select example" disabled>
+                                    <select class="form-select" aria-label="Default select example" >
                                         <option selected>Open toselect</option>
                                         <option value="1">One</option>
                                         <option value="2">Two</option>
@@ -188,14 +188,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     <div class="form-check form-switch d-flex justify-content-center">
                                         <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" <?= $row['IsActive'] == 1
                                                                                                                                         ? 'checked'
-                                                                                                                                        : 'null' ?> disabled>
+                                                                                                                                        : 'null' ?> >
                                     </div>
                                 </td>
                                 <td class="d-flex user-row-options">
-                                    <button class="btn btn-warning btn-block me-3  edite-row-btn "
+                                    <button class="btn btn-warning btn-block me-3  edite-user-btn "
                                     onclick=" editRow(this) ">Edit</button>
 
-                                    
+
                                     <button class="btn btn-danger btn-block delete-row-btn " onclick="deleteRow(this)">Delete</button>
                                 </td>
                             </tr>
