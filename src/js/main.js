@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  // $('#timerwork').preventDefault()
   $(function () {
     deleteRow = function (that) {
       const userID = $(that)
@@ -53,12 +54,6 @@ $(document).ready(function () {
         .find(".password")
         .val();
       const email = $(that).parent().parent().children().find(".Email").val();
-      // const EmployeeID = $(that)
-      //   .parent()
-      //   .parent()
-      //   .children()
-      //   .find(".EmployeeID")
-      //   .val();
       const DisplayName = $(that)
         .parent()
         .parent()
@@ -90,8 +85,90 @@ $(document).ready(function () {
           console.log(response);
         },
       });
-      // alert($(that).data("id"));
-      // $(that).parent().parent().remove();
+   
     };
   });
+
+ 
+  $('.checkout').on('click', function (event) {
+    (event).preventDefault()
+    let  userID=$(".user_code").text()
+
+    $.ajax({
+      type: 'POST',
+      url: 'src/ajax/timer.php',
+      data: {
+        check: true,
+        userID: userID
+
+      },
+      success: function (data) {
+        // data =data[];
+        //  console.log("jkkhkjhkjhkjh");
+          console.log(data);
+
+
+
+      },
+      error: function (data) {
+          console.log(data);
+
+      }
+    })
+  })
+
+
+
+  $('.take_Break').on('click', function (event) {
+    console.log(event);
+    (event).preventDefault()
+    let  userID=$(".transId").text()
+console.log(event);
+    $.ajax({
+      type: 'POST',
+      url: 'src/ajax/timer.php',
+      data: {
+        break: true,
+        userID: userID
+
+      },
+      success: function (data) {
+          console.log(data);
+      },
+      error: function (data) {
+          console.log(data);
+
+      }
+    })
+    $(this).css("display","none")
+    $(".stop_Break").css("display","block")
+  })
+  $('.stop_Break').on('click', function (event) {
+    console.log(event);
+    (event).preventDefault()
+    let  userID=$(".user_code").text()
+console.log(event);
+    $.ajax({
+      type: 'POST',
+      url: 'src/ajax/timer.php',
+      data: {
+        stop: true,
+        userID: userID
+
+      },
+      success: function (data) {
+          console.log(data);
+      },
+      error: function (data) {
+          console.log(data);
+
+      }
+    })
+    $(this).css("display","none")
+    $(".take_Break").css("display","block")
+  })
+  
+
+
+
 });

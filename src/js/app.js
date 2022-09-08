@@ -15,7 +15,7 @@ let breakat=document.getElementById("breakat")
 let task =document.getElementById("task")
 let checkinbtn =document.querySelector(".getCurrentTime")
 let breakparent =document.querySelector(".break-parent")
-let checkOut=document.querySelector(".checkout")
+// let checkOut=document.querySelector(".checkout")
 let checkedout =document.getElementById("checked-out");
 let workingat = document.getElementById("working-at");
 let havebreak = document.getElementById("have-break");
@@ -29,15 +29,37 @@ start.addEventListener("click", function (e) {
      }
 
 })
-stop.addEventListener("click", function (e) {
-     getCurrentTime(e)
-     clearTimeout(timex);
-     e.target.classList.toggle("disable")
-     start.innerText = "Continue"
+// stop.addEventListener("click", function (e) {
+//      getCurrentTime(e)
+//      clearTimeout(timex);
+//      e.target.classList.toggle("disable")
+//      start.innerText = "Continue"
 
 
+// })
+//***************************************************************************//
+
+$('#cancel_room').on('submit', function (e) {
+   
+     $.ajax({
+       type: 'post',
+       url: 'timer.php',
+       data: {
+            check: "out",
+            userID: userID,
+
+       },
+       success: function (data) {
+         console.log(data);
+         conn.send(data);
+         location.reload();
+       },
+       error: function (data) {
+ 
+       }
+     })
 })
-
+//***************************************************************************//
 function startTimer() {
      start.innerText=`Working ...`
 
@@ -90,28 +112,28 @@ function getCurrentTime(event) {
 
      }
 }
-function checkout() {
-     clearTimeout(timex)
-     disable(start);
-     disable(stop);
-     disable(task);
-     disable(checkinbtn);
-     disable(checkOut);
-     today = new Date();
-     var h = today.getHours(); // 0 - 23
-     var m = today.getMinutes(); // 0 - 59
-     var s = today.getSeconds(); // 0 - 59
-     var session = "AM";
-     if(h == 0){h = 12;}
-     if(h > 12){ h = h - 12;session = "PM";}
-     h = (h < 10) ? "0" + h : h;
-     m = (m < 10) ? "0" + m : m;
-     s = (s < 10) ? "0" + s : s;
-     var time = h + ":" + m + ":" + s + " " + session;
+// function checkout() {
+//      clearTimeout(timex)
+//      disable(start);
+//      disable(stop);
+//      disable(task);
+//      disable(checkinbtn);
+//      disable(checkOut);
+//      today = new Date();
+//      var h = today.getHours(); // 0 - 23
+//      var m = today.getMinutes(); // 0 - 59
+//      var s = today.getSeconds(); // 0 - 59
+//      var session = "AM";
+//      if(h == 0){h = 12;}
+//      if(h > 12){ h = h - 12;session = "PM";}
+//      h = (h < 10) ? "0" + h : h;
+//      m = (m < 10) ? "0" + m : m;
+//      s = (s < 10) ? "0" + s : s;
+//      var time = h + ":" + m + ":" + s + " " + session;
          
-          checkedout.innerHTML=time
+//           checkedout.innerHTML=time
      
-}
+// }
 
 function disable(obj) {
      obj.classList.add("disable")

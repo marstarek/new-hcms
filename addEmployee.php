@@ -19,7 +19,6 @@ if ($result->num_rows !== 1) {
 $error_field = [];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validation
-    // var_dump($_POST);
     if (!(isset($_POST['Username']) && !empty($_POST['Username']))) {
         $error_field[] = 'Username';
     }
@@ -59,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $Email = mysqli_escape_string($conn, $_POST['Email']);
     $NationalityID =  mysqli_escape_string($conn, $_POST['NationalityID']);
     $IsDeleted = isset($_POST['IsDeleted']) && $_POST['IsDeleted'] == 'on' ? 1 : 0;
+    $isleader = mysqli_escape_string($conn, $_POST['isleader']);
 
     // $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . 'uploads';
     // $avatar = '';
@@ -70,11 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     echo 'error cant upload file';
     //     exit();
     // }
-    var_dump($_SESSION);
 
 
     $query =
-        "INSERT INTO `employee` (`Code`,`EnName`,`DOB`,`SSN`,`Address`,GenderID,NationalityID,CreatedBy,JobID,Phone,Email,IsDeleted) VALUES ('" .
+        "INSERT INTO `employee` (`Code`,`EnName`,`DOB`,`SSN`,`Address`,GenderID,NationalityID,CreatedBy,JobID,Phone,Email,IsDeleted,isleader) VALUES ('" .
         $Code .
         "' , '" .
         $EnName .
@@ -105,22 +104,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "',
         '" .
         $IsDeleted .
+        "',
+        '" .
+        $isleader .
         "'
         
         
         
         )";
     if (mysqli_query($conn, $query)) {
-        // header('Location: list.php');
     } else {
-        //echo $query;
         echo mysqli_error($conn);
     }
-
     mysqli_close($conn);
 }
-
-// }
 ?>
 
 
@@ -150,7 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <section class="table-container">
                 <h2 class="py-2"><i class="bi bi-person"></i> Add/Edit Employee</h2>
-                <button class="btn btn-success  add-newuser-btn" role="button"><strong>+</strong></button>
 
                 <table class="table  my-5">
                     <thead>
@@ -193,6 +189,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                             </th>
+                            <th scope="col">Isleader
+
+
+                            </th>
                             <th scope="col">options
 
 
@@ -213,11 +213,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             exit();
                         }
                         $query = 'SELECT * FROM `employee`';
-                        print $query;
                         $result = mysqli_query($conn, $query);
-                        // var_dump($result);
                         while ($row = mysqli_fetch_assoc($result)) :
-                            var_dump($row); ?>
+                           ?>
                             <tr class="add-user-row">
                                 <th scope="row">1</th>
                                 <td>
@@ -256,6 +254,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 <td>
                                     <input class="form-control bg-dark text-white" value="<?= $row['IsDeleted'] ?>" type="IsDeleted" type="text" placeholder="<?= $row['IsDeleted'] ?>" aria-label="<?= $row['IsDeleted'] ?>" disabled>
                                 </td>
+                                <td>
+                                    <input class="form-control bg-dark text-white" value="<?= $row['isleader'] ?>" type="isleader" type="text" placeholder="<?= $row['isleader'] ?>" aria-label="<?= $row['isleader'] ?>" disabled>
+                                </td>
 
 
 
@@ -288,85 +289,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <form method="POST" action="addEmployee.php" enctype="multipart/form-data">
                                 <th scope="row">2</th>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " type="text" placeholder="Code" aria-label="Code" name="Code" id="Code" placeholder="Code" value="<?= isset(
-                                                                                                                                                                                            $_POST['Code']
-                                                                                                                                                                                        )
-                                                                                                                                                                                            ? $_POST['Code']
-                                                                                                                                                                                            : '' ?>">
+                                    <input class="form-control bg-dark  text-white " type="text" placeholder="Code" aria-label="Code" name="Code" id="Code" placeholder="Code" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark  text-white " type="text" placeholder="EnName" aria-label="EnName" name="EnName" id="EnName" placeholder="EnName" value="<?= isset(
-                                                                                                                                                                                                    $_POST['EnName']
-                                                                                                                                                                                                )
-                                                                                                                                                                                                    ? $_POST['EnName']
-                                                                                                                                                                                                    : '' ?>">
+                                    <input class="form-control bg-dark  text-white " type="text" placeholder="EnName" aria-label="EnName" name="EnName" id="EnName" placeholder="EnName" value="">
                                 </td>
                                 <td>
                                     <input class="form-control bg-dark  text-white " type="text" placeholder="DOB" aria-label="DOB" name="DOB" id="DOB">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="SSN" type="text" placeholder="SSN" aria-label="SSN" name="SSN" id="SSN" placeholder="enter your SSN" value="<?= isset(
-                                                                                                                                                                                                            $_POST['SSN']
-                                                                                                                                                                                                        )
-                                                                                                                                                                                                            ? $_POST['SSN']
-                                                                                                                                                                                                            : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="SSN" type="text" placeholder="SSN" aria-label="SSN" name="SSN" id="SSN" placeholder="enter your SSN" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="Address" type="text" placeholder="Address" aria-label="Address " name="Address" id="Address" placeholder="enter your Address" value="<?= isset(
-                                                                                                                                                                                                                                    $_POST['Address']
-                                                                                                                                                                                                                                )
-                                                                                                                                                                                                                                    ? $_POST['Address']
-                                                                                                                                                                                                                                    : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="Address" type="text" placeholder="Address" aria-label="Address " name="Address" id="Address" placeholder="enter your Address" value="">
                                 </td>
 
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="GenderID" type="text" placeholder="GenderID" aria-label="GenderID " name="GenderID" id="GenderID" placeholder="enter your GenderID" value="<?= isset(
-                                                                                                                                                                                                                                        $_POST['GenderID']
-                                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                                        ? $_POST['GenderID']
-                                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="GenderID" type="text" placeholder="GenderID" aria-label="GenderID " name="GenderID" id="GenderID" placeholder="enter your GenderID" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="NationalityID" type="text" placeholder="NationalityID" aria-label="NationalityID " name="NationalityID" id="NationalityID" placeholder="enter your NationalityID" value="<?= isset(
-                                                                                                                                                                                                                                                                        $_POST['NationalityID']
-                                                                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                                                                        ? $_POST['NationalityID']
-                                                                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="NationalityID" type="text" placeholder="NationalityID" aria-label="NationalityID " name="NationalityID" id="NationalityID" placeholder="enter your NationalityID" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="CreatedBy" type="text" placeholder="CreatedBy" aria-label="CreatedBy " name="CreatedBy" id="CreatedBy" placeholder="enter your CreatedBy" value="<?= isset(
-                                                                                                                                                                                                                                                $_POST['CreatedBy']
-                                                                                                                                                                                                                                            )
-                                                                                                                                                                                                                                                ? $_POST['CreatedBy']
-                                                                                                                                                                                                                                                : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="CreatedBy" type="text" placeholder="CreatedBy" aria-label="CreatedBy " name="CreatedBy" id="CreatedBy" placeholder="enter your CreatedBy" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="JobID" type="text" placeholder="JobID" aria-label="JobID " name="JobID" id="JobID" placeholder="enter your JobID" value="<?= isset(
-                                                                                                                                                                                                                        $_POST['JobID']
-                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                        ? $_POST['JobID']
-                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="JobID" type="text" placeholder="JobID" aria-label="JobID " name="JobID" id="JobID" placeholder="enter your JobID" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="Phone" type="text" placeholder="Phone" aria-label="Phone " name="Phone" id="Phone" placeholder="enter your Phone" value="<?= isset(
-                                                                                                                                                                                                                        $_POST['Phone']
-                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                        ? $_POST['Phone']
-                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="Phone" type="text" placeholder="Phone" aria-label="Phone " name="Phone" id="Phone" placeholder="enter your Phone" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="Email" type="text" placeholder="Email" aria-label="Email " name="Email" id="Email" placeholder="enter your Email" value="<?= isset(
-                                                                                                                                                                                                                        $_POST['Email']
-                                                                                                                                                                                                                    )
-                                                                                                                                                                                                                        ? $_POST['Email']
-                                                                                                                                                                                                                        : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="Email" type="text" placeholder="Email" aria-label="Email " name="Email" id="Email" placeholder="enter your Email" value="">
                                 </td>
                                 <td>
-                                    <input class="form-control bg-dark text-white" type="IsDeleted" type="text" placeholder="IsDeleted" aria-label="IsDeleted " name="IsDeleted" id="IsDeleted" placeholder="enter your IsDeleted" value="<?= isset(
-                                                                                                                                                                                                                                                $_POST['IsDeleted']
-                                                                                                                                                                                                                                            )
-                                                                                                                                                                                                                                                ? $_POST['IsDeleted']
-                                                                                                                                                                                                                                                : '' ?>">
+                                    <input class="form-control bg-dark text-white" type="IsDeleted" type="text" placeholder="IsDeleted" aria-label="IsDeleted " name="IsDeleted" id="IsDeleted" placeholder="enter your IsDeleted" value="">
+                                </td>
+                                <td>
+                                    <input class="form-control bg-dark text-white" type="isleader" type="text" placeholder="isleader" aria-label="isleader " name="isleader" id="isleader" placeholder="enter your isleader" value="">
                                 </td>
 
 

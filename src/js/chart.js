@@ -23,7 +23,10 @@ const data = {
     const myChart = new Chart(
     document.getElementById('myChart'),
     config
-);
+    );
+let x1 = 40;
+let x2 = 200;
+let x3 = 90;
 const data2 = {
      labels: [
        'Red',
@@ -32,7 +35,7 @@ const data2 = {
      ],
      datasets: [{
        label: 'My First Dataset',
-       data: [300, 50, 100],
+       data: [x1, x2, x3],
        backgroundColor: [
          'rgb(255, 99, 132)',
          'rgb(54, 162, 235)',
