@@ -1,18 +1,11 @@
         <?php
-
         session_start();
-        include_once('./db.php');
-
-        // $conn = mysqli_connect('localhost', 'root', null, 'hr-01');
-        // if (!$conn) {
-        //   echo mysqli_connect_error();
-        //   exit();
-        // }
-        $loginDate= $_SESSION['logindate'];
-        $empcode=$_SESSION['EmployeeID'];
-        $sessionTransID = $_SESSION["ID"];
-        $_SESSION['transId'] ="";
-
+        include_once './db.php';
+var_dump($_SESSION);
+       
+        $loginDate = $_SESSION['logindate'];
+        $empcode = $_SESSION['EmployeeID'];
+        $sessionTransID = $_SESSION['ID'];
 
         $qr = "SELECT *  FROM `trans` WHERE code = $empcode ";
         $qrresult = mysqli_query($conn, $qr);
@@ -28,8 +21,8 @@
         // var_dump($loginDate);
         // $ad = strtotime($loginDate);
         // echo $ad."\n";
-       
-        // $dt = new DateTime("$loginDate");  
+
+        // $dt = new DateTime("$loginDate");
         // echo $dt->format('Y-m-d H:i:s');
         // var_dump($dt);
         // var_dump (substr($loginDate,0, -2));
@@ -37,54 +30,46 @@
 
 
 
-        $idquery = "SELECT id  FROM `trans` WHERE  code = $empcode AND timein = '$loginDate'  ";
-        $idresult = mysqli_query($conn, $idquery);
-        $idrow = mysqli_fetch_assoc($idresult);
-             if ($row = mysqli_fetch_assoc($idresult)) {
-        $_SESSION['transId'] = $row["id"];
-
-}
-        // var_dump($idrow);
-        // echo $idrow["id"];
 
 
-
-        if ($idresult->num_rows !== 1) {
-          $startquery ="INSERT INTO `trans` (`name`,`code`,`timein`,`timeout`,`break`,`workingon`,`status`,`endbreak`) VALUES
-           ('" .$_SESSION['DisplayName'] ."' , '" .$_SESSION['EmployeeID']."' ,'" .$_SESSION['logindate'] ."','" ."0"."','" ."0" ."','" ."0" ."','" ."0" ."','" ."0" ."')";
-          mysqli_query($conn,$startquery);
-            $dd = "SELECT id  FROM `trans` WHERE  code = $empcode AND timein = '$loginDate'  ";
-        $ff = mysqli_query($conn, $dd);
-       
-          if ($row = mysqli_fetch_assoc($ff)) {
-        $_SESSION['transId'] = $row["id"];
-
-}
-
-        }else{
-
-           echo "already checked in";
-     
-        }
-
+        // $idquery = "SELECT id  FROM `trans` WHERE  code = $empcode ORDER BY ID DESC LIMIT 1";
+        // $idresult = mysqli_query($conn, $idquery);
+        // if ($idresult->num_rows !== 1) {
+        //     $startquery =
+        //         "INSERT INTO `trans` (`name`,`code`,`timein`,`timeout`,`break`,`workingon`,`status`,`endbreak`) VALUES
+        //    ('" .
+        //         $_SESSION['DisplayName'] .
+        //         "' , '" .
+        //         $_SESSION['EmployeeID'] .
+        //         "' ,SYSDATE(),'" .
+        //         '0' .
+        //         "','" .
+        //         '0' .
+        //         "','" .
+        //         '0' .
+        //         "','" .
+        //         '0' .
+        //         "','" .
+        //         '0' .
+        //         "')";
+        //         // echo $startquery;
+        //         // exit();
+        //     mysqli_query($conn, $startquery);
         
-    
-
-
-
-
-
-
-
-
-        $sessionUserID = isset($_SESSION["ID"]) ? $_SESSION["ID"] : -1;
+        // } else {
+        //     echo 'already checked in';
+            
+        // }
+  
+       
+        // var_dump( $cc);exit();
+        $sessionUserID = isset($_SESSION['ID']) ? $_SESSION['ID'] : -1;
         $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1";
         $result = mysqli_query($conn, $query);
         if ($result->num_rows !== 1) {
-          echo "Un Authorized !";
-          exit();
+            echo 'Un Authorized !';
+            exit();
         }
-  
         ?>
 
 
@@ -121,7 +106,7 @@
 
         </head>
         <!-- Include Header File -->
-        <?php include_once('includes/header.php'); ?>
+        <?php include_once 'includes/header.php'; ?>
 
         <body>
             <main>
@@ -136,13 +121,14 @@
                                     </div>
                                     <div class="user__text">
                                         <h1 class="text--med">
-                                            <?= $_SESSION['DisplayName']; ?>
+                                            <?= $_SESSION['DisplayName'] ?>
                                         </h1>
                                         <p class="text--small"><span>ID:</span> <span
-                                                class="transId"><?= $_SESSION['transId']; ?></span>
+                                                class="user_id"><?= $_SESSION['ID'] ?></span>
 
                                         </p>
-                                    </div>
+                                        <span
+                                                class="transId"><?= $_SESSION['transId'] ?></span>                                    </div>
                                 </div>
                                 <ul class="user__nav d-flex">
                                     <li class="">Sphinx Co</li>
@@ -150,7 +136,7 @@
                                     <li>checked in at: <span id="startat"></span>
                                     </li>
                                     <li>Loged in at: <span>
-                                            <?= $_SESSION['logindate']; ?>
+                                            <?= $_SESSION['logindate'] ?>
                                         </span></li>
                                     <li>working at: <span id="working-at"></span></li>
                                     <li>checked out at:<span class="time-card__hours " id="checked-out"></span>
@@ -242,49 +228,60 @@
                                 </div>
                             </div>
                             <?php
+                            $conn = mysqli_connect(
+                                'localhost',
+                                'root',
+                                null,
+                                'hr-01'
+                            );
 
-                  $conn = mysqli_connect('localhost', 'root', null, 'hr-01');
+                            if (!$conn) {
+                                echo mysqli_connect_error();
+                                exit();
+                            }
 
-                  if (!$conn) {
-                    echo mysqli_connect_error();
-                    exit();
-                  }
+                            $sessionUserID = isset($_SESSION['ID'])
+                                ? $_SESSION['ID']
+                                : -1;
 
-                  $sessionUserID = isset($_SESSION["ID"]) ? $_SESSION["ID"] : -1;
+                            $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1 AND IsLeader = 1";
 
-                  $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1 AND IsLeader = 1";
-
-                  $result = mysqli_query($conn, $query);
-                  if ($result->num_rows !== 1) {
-                    echo "Un Authorized !";
-                    exit();
-                  }
-                  include_once('chart.php');
-                  ?>
+                            $result = mysqli_query($conn, $query);
+                            if ($result->num_rows !== 1) {
+                                echo 'Un Authorized !';
+                                exit();
+                            }
+                            include_once 'chart.php';
+                            ?>
 
                             <div class="  row  py-3 ps-2 admins-controls" style="--bs-columns: 4; --bs-gap: 5rem;">
                                 <?php
+                                $conn = mysqli_connect(
+                                    'localhost',
+                                    'root',
+                                    null,
+                                    'hr-01'
+                                );
 
-                    $conn = mysqli_connect('localhost', 'root', null, 'hr-01');
+                                if (!$conn) {
+                                    echo mysqli_connect_error();
+                                    exit();
+                                }
 
-                    if (!$conn) {
-                      echo mysqli_connect_error();
-                      exit();
-                    }
+                                $sessionUserID = isset($_SESSION['ID'])
+                                    ? $_SESSION['ID']
+                                    : -1;
 
-                    $sessionUserID = isset($_SESSION["ID"]) ? $_SESSION["ID"] : -1;
+                                $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1 AND IsLeader = 1";
 
-                    $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1 AND IsLeader = 1";
-
-                    $result = mysqli_query($conn, $query);
-                    if ($result->num_rows !== 1) {
-                      echo "Un Authorized !";
-                      exit();
-                    }
-                    include_once('team.php');
-                    include_once('inrequests.php');
-
-                    ?>
+                                $result = mysqli_query($conn, $query);
+                                if ($result->num_rows !== 1) {
+                                    echo 'Un Authorized !';
+                                    exit();
+                                }
+                                include_once 'team.php';
+                                include_once 'inrequests.php';
+                                ?>
 
 
 

@@ -92,19 +92,18 @@ $(document).ready(function () {
  
   $('.checkout').on('click', function (event) {
     (event).preventDefault()
-    let  userID=$(".user_code").text()
+    let  userID=$(".transId").text()
 
     $.ajax({
       type: 'POST',
       url: 'src/ajax/timer.php',
       data: {
-        check: true,
+        checkout: true,
         userID: userID
 
       },
       success: function (data) {
-        // data =data[];
-        //  console.log("jkkhkjhkjhkjh");
+ 
           console.log(data);
 
 
@@ -123,7 +122,7 @@ $(document).ready(function () {
     console.log(event);
     (event).preventDefault()
     let  userID=$(".transId").text()
-console.log(event);
+console.log(userID);
     $.ajax({
       type: 'POST',
       url: 'src/ajax/timer.php',
@@ -143,11 +142,16 @@ console.log(event);
     $(this).css("display","none")
     $(".stop_Break").css("display","block")
   })
+
+
+
+
+
   $('.stop_Break').on('click', function (event) {
     console.log(event);
     (event).preventDefault()
-    let  userID=$(".user_code").text()
-console.log(event);
+    let  userID=$(".transId").text()
+console.log(userID);
     $.ajax({
       type: 'POST',
       url: 'src/ajax/timer.php',

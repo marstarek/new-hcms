@@ -27,6 +27,49 @@ if ($row = mysqli_fetch_assoc($result)) {
      $_SESSION['DisplayName'] = $row['DisplayName'];
      $_SESSION['EmployeeID'] = $row['EmployeeID'];
      $_SESSION['logindate'] = date('Y-m-d h:i:sa');
+     $ffl=$row['EmployeeID'];
+
+     $idquery = "SELECT id  FROM `trans` WHERE  code = $ffl ORDER BY ID DESC LIMIT 1";
+     $idresult = mysqli_query($conn, $idquery);
+     $dd = "SELECT id  FROM `trans` WHERE  code = $ffl ORDER BY ID DESC LIMIT 1   ";
+     $ff = mysqli_query($conn, $dd);
+     $cc = mysqli_fetch_assoc($ff);
+     if ($idresult->num_rows !== 1) {
+         $startquery =
+             "INSERT INTO `trans` (`name`,`code`,`timein`,`timeout`,`break`,`workingon`,`status`,`endbreak`) VALUES
+        ('" .
+             $_SESSION['DisplayName'] .
+             "' , '" .
+             $_SESSION['EmployeeID'] .
+             "' ,SYSDATE(),'" .
+             '0' .
+             "','" .
+             '0' .
+             "','" .
+             '0' .
+             "','" .
+             '0' .
+             "','" .
+             '0' .
+             "')";
+             // echo $startquery;
+             // exit();
+         mysqli_query($conn, $startquery);
+
+        //  echo $dd;exit();
+        //  var_dump($cc['id']);exit();
+         if(!isset( $_SESSION['transId'])) {
+             $_SESSION['transId'] = $cc['id'];
+    
+         }
+     } else {
+         echo 'already checked in';
+         if(!isset( $_SESSION['transId'])) {
+            $_SESSION['transId'] = $cc['id'];
+   
+        }
+     }
+
      header('Location:./timer.php');
                               
 
