@@ -6,63 +6,14 @@ var_dump($_SESSION);
         $loginDate = $_SESSION['logindate'];
         $empcode = $_SESSION['EmployeeID'];
         $sessionTransID = $_SESSION['ID'];
+        $leadername=$_SESSION['leadername'];
 
         $qr = "SELECT *  FROM `trans` WHERE code = $empcode ";
         $qrresult = mysqli_query($conn, $qr);
         $timeinquary = "SELECT timein  FROM `trans` WHERE code = $empcode ";
         $timeinresult = mysqli_query($conn, $timeinquary);
         $daterow = mysqli_fetch_assoc($timeinresult);
-        // $curdate = date('Y-m-d');
-        // $loginDatenew = strtotime($loginDate);
-        // $dateresult = date('Y-m-d',$loginDatenew);
-        // $databasedate = ($daterow["timein"]);
-        // $dateresultx = date('Y-m-d H:i:s',$databasedate);
-        //   var_dump($databasedate);
-        // var_dump($loginDate);
-        // $ad = strtotime($loginDate);
-        // echo $ad."\n";
-
-        // $dt = new DateTime("$loginDate");
-        // echo $dt->format('Y-m-d H:i:s');
-        // var_dump($dt);
-        // var_dump (substr($loginDate,0, -2));
-        // $loginDate=substr($loginDate,0, -2);
-
-
-
-
-
-        // $idquery = "SELECT id  FROM `trans` WHERE  code = $empcode ORDER BY ID DESC LIMIT 1";
-        // $idresult = mysqli_query($conn, $idquery);
-        // if ($idresult->num_rows !== 1) {
-        //     $startquery =
-        //         "INSERT INTO `trans` (`name`,`code`,`timein`,`timeout`,`break`,`workingon`,`status`,`endbreak`) VALUES
-        //    ('" .
-        //         $_SESSION['DisplayName'] .
-        //         "' , '" .
-        //         $_SESSION['EmployeeID'] .
-        //         "' ,SYSDATE(),'" .
-        //         '0' .
-        //         "','" .
-        //         '0' .
-        //         "','" .
-        //         '0' .
-        //         "','" .
-        //         '0' .
-        //         "','" .
-        //         '0' .
-        //         "')";
-        //         // echo $startquery;
-        //         // exit();
-        //     mysqli_query($conn, $startquery);
-        
-        // } else {
-        //     echo 'already checked in';
-            
-        // }
-  
-       
-        // var_dump( $cc);exit();
+    
         $sessionUserID = isset($_SESSION['ID']) ? $_SESSION['ID'] : -1;
         $query = "SELECT *  FROM `users` WHERE ID = $sessionUserID AND isAdmin = 1";
         $result = mysqli_query($conn, $query);
@@ -127,8 +78,9 @@ var_dump($_SESSION);
                                                 class="user_id"><?= $_SESSION['ID'] ?></span>
 
                                         </p>
-                                        <span
-                                                class="transId"><?= $_SESSION['transId'] ?></span>                                    </div>
+                                        <span class="transId"><?= $_SESSION['transId'] ?></span>
+                                        <span class="leadername"><?= $_SESSION['leadername'] ?></span>
+                                    </div>
                                 </div>
                                 <ul class="user__nav d-flex">
                                     <li class="">Sphinx Co</li>
@@ -226,6 +178,83 @@ var_dump($_SESSION);
                                 <div class="col-lg-6  px-0">
                                     <div id='calendar'></div>
                                 </div>
+                            </div>
+                            <div class="tasks" style=" display: grid ;   grid-template-columns: auto auto auto;">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make
+                                            up the bulk of the card's content.</p>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Leader Name</li>
+                                        <li class="list-group-item">A second item</li>
+                                        <li class="list-group-item">A third item</li>
+                                        <li class="list-group-item border-bottom">A third item</li>
+                                    </ul>
+                                    <div class="card-body">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected>Status</option>
+                                            <option value="1">One</option>
+                                            <option value="2">Two</option>
+                                            <option value="3">Three</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div class="tasks"
+                                style=" display: grid ;   grid-template-columns: auto auto auto;padding: 50px 0;">
+                                <div class="card" style="width: 18rem;">
+                                    <div class="card-body">
+                                        <!-- <form class="row g-3 needs-validation" novalidate> -->
+
+                                        <div class="">
+                                            <label for="exampleFormControlInput1" class="form-label">Task
+                                                Title</label>
+                                            <input type="text" class="form-control task_title"
+                                                id="exampleFormControlInput1" placeholder="title">
+                                        </div>
+                                        <div class="">
+                                            <label for="exampleFormControlTextarea1" class="form-label">task
+                                                content</label>
+                                            <textarea class="form-control task_content" id="exampleFormControlTextarea1"
+                                                rows="3"></textarea>
+                                        </div>
+                                        <select class="form-select task_member" aria-label="Default select example">
+                                            <option selected>To member</option>
+                                            <option value="tarek">tarek</option>
+                                            <option value="hosnyx">hosnyx</option>
+                                            <option value="tarekx">tarekx</option>
+                                        </select>
+                                        <div class="">
+                                            <label for="exampleFormControlInput2" class="form-label">Start
+                                                Date</label>
+                                            <input type="date" class="form-control start_date"
+                                                id="exampleFormControlInput2" placeholder="title">
+                                        </div>
+                                        <div class="">
+                                            <label for="exampleFormControlInput3" class="form-label">Dead
+                                                Line</label>
+                                            <input type="date" class="form-control dead_line"
+                                                id="exampleFormControlInput3" placeholder="title">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="btn btn-primary add_task ">Submit form</button>
+                                        </div>
+                                        <!-- </form> -->
+                                    </div>
+                                </div>
+
+
+
+
+
                             </div>
                             <?php
                             $conn = mysqli_connect(

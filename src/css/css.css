@@ -457,3 +457,6 @@
      opacity:.5;
      pointer-events: none
    }
+   .tasks{
+display: grid;
+grid-template-columns: auto auto auto;}

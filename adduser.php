@@ -53,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $EmployeeID = mysqli_escape_string($conn, $_POST['EmployeeID']);
     $CreatedDate = date('Y-m-d h:i:sa');
     $IsLeader = mysqli_escape_string($conn, $_POST['IsLeader']);
+    $leadername =$_POST['leadername'];
 
     // $uploads_dir = $_SERVER['DOCUMENT_ROOT'] . 'uploads';
     // $avatar = '';
@@ -65,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     exit();
     // }
     $query =
-        "INSERT INTO `users` (`Username`,`DisplayName`,`email`,`password`,`IsDeleted`,`isAdmin`,isActive,EmployeeID,CreatedBy,CreatedDate,IsLeader) VALUES ('" .
+        "INSERT INTO `users` (`Username`,`DisplayName`,`email`,`password`,`IsDeleted`,`isAdmin`,isActive,EmployeeID,CreatedBy,CreatedDate,IsLeader,leadername) VALUES ('" .
         $Username .
         "' , '" .
         $DisplayName .
@@ -92,6 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "',
         '" .
         $IsLeader .
+        "',
+        '" .
+        $leadername .
         "'
         
         
@@ -153,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <th scope="col">Password</th>
                             <th scope="col">Mac</th>
                             <th scope="col">Admin</th>
-                            <th scope="col">Role</th>
+                            <th scope="col">leaderName</th>
                             <th scope="col">Active</th>
                             <th scope="col">IsLeader</th>
                             <th scope="col">Options</th>
@@ -289,11 +293,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                     </div>
                                 </td>
                                 <td>
-                                    <select class="form-select" aria-label="Default select example">
+                                    <select class="form-select" aria-label="Default select example" name="leadername">
                                         <option selected>Open this select menu</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <option value="Ahmed3">Ahmed3</option>
+                                        <option value="Hosnyx">Hosnyx</option>
+                                        <option value="admin">admin</option>
+                                        <option value="tarek">tarek</option>
                                     </select>
                                 </td>
                                 <td>

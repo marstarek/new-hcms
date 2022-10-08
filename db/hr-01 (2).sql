@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2022 at 03:49 PM
+-- Generation Time: Aug 27, 2022 at 11:20 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -135,54 +135,6 @@ CREATE TABLE `lkp_status` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tasks`
---
-
-CREATE TABLE `tasks` (
-  `taskID` int(255) NOT NULL,
-  `userTo` varchar(255) DEFAULT NULL,
-  `userIdTo` int(255) DEFAULT NULL,
-  `leaderaName` varchar(255) DEFAULT NULL,
-  `leaderaID` int(255) DEFAULT NULL,
-  `taskContent` varchar(255) DEFAULT NULL,
-  `taskTitle` varchar(255) DEFAULT NULL,
-  `createdAt` datetime DEFAULT NULL,
-  `startIn` datetime DEFAULT NULL,
-  `deadLine` datetime DEFAULT NULL,
-  `status` int(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `trans`
---
-
-CREATE TABLE `trans` (
-  `id` int(20) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `code` int(20) NOT NULL,
-  `timein` datetime NOT NULL,
-  `timeout` datetime DEFAULT NULL,
-  `break` datetime DEFAULT NULL,
-  `workingon` varchar(100) NOT NULL,
-  `total` int(100) DEFAULT NULL,
-  `status` int(10) DEFAULT NULL,
-  `endbreak` datetime DEFAULT NULL,
-  `totaltime2` datetime GENERATED ALWAYS AS (timediff(`timeout`,`timein`)) VIRTUAL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `trans`
---
-
-INSERT INTO `trans` (`id`, `name`, `code`, `timein`, `timeout`, `break`, `workingon`, `total`, `status`, `endbreak`) VALUES
-(195, 'tarekahmed', 300, '2022-09-10 11:08:20', '2022-09-10 11:09:08', '2022-09-10 11:09:01', '0', NULL, 0, '2022-09-10 12:11:25'),
-(196, 'admin', 155, '2022-09-10 13:05:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', NULL, 0, '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -201,24 +153,18 @@ CREATE TABLE `users` (
   `UpdatedBy` int(11) DEFAULT NULL,
   `UpdatedDate` datetime(6) DEFAULT NULL,
   `EmployeeID` int(11) DEFAULT NULL,
-  `IsLeader` tinyint(4) DEFAULT NULL,
-  `leadername` varchar(255) DEFAULT NULL
+  `IsLeader` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `Username`, `DisplayName`, `Email`, `Password`, `SaltID`, `IsDeleted`, `isAdmin`, `IsActive`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`, `EmployeeID`, `IsLeader`, `leadername`) VALUES
-(39, 'Ahmed3', 'AhmedTest', 'ahmed@ahmed.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 1, 1, 1, 39, '2022-08-12 07:03:56pm', NULL, NULL, 123, NULL, NULL),
-(41, 'Hosnyx', 'Hosny', 'Hosny00@d.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 0, 1, 39, '2022-08-12 08:02:25pm', NULL, NULL, 122, 1, NULL),
-(124, 'tarek', 'tarekahmed', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 41, '2022-08-27 10:38:26am', NULL, NULL, 300, 1, 'admin'),
-(125, 'admin', 'admin', 'tarekahmed2020@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 124, '2022-09-06 04:32:18pm', NULL, NULL, 155, 1, NULL),
-(158, 'tarek', '', '', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 0, 0, 125, '2022-09-10 01:37:25pm', NULL, NULL, 0, 0, '2'),
-(159, 'leader', 'boda', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:38:04pm', NULL, NULL, 1233, 1, '2'),
-(160, 'leader', 'boda', 'tarekahmed1568@gmail.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 1, 1, 125, '2022-09-10 01:39:19pm', NULL, NULL, 1233, 1, '2'),
-(161, 'tarekx', 'tarekx', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:40:20pm', NULL, NULL, 0, 1, 'Hosnyx'),
-(162, 'tarekx', 'tarekx', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:41:17pm', NULL, NULL, 0, 1, 'Hosnyx');
+INSERT INTO `users` (`ID`, `Username`, `DisplayName`, `Email`, `Password`, `SaltID`, `IsDeleted`, `isAdmin`, `IsActive`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`, `EmployeeID`, `IsLeader`) VALUES
+(39, 'Ahmed3', 'AhmedTest', 'ahmed@ahmed.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 1, 1, 1, 39, '2022-08-12 07:03:56pm', NULL, NULL, 123, NULL),
+(41, 'Hosnyx', 'Hosny', 'Hosny00@d.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 0, 1, 39, '2022-08-12 08:02:25pm', NULL, NULL, 122, 1),
+(123, 'tarek', 'tarek', 'tarek@ggg.com', '123456789', NULL, 0, 1, 1, 0, '', NULL, NULL, NULL, 1),
+(124, 'tarek', 'tarekahmed', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 41, '2022-08-27 10:38:26am', NULL, NULL, 300, 1);
 
 --
 -- Indexes for dumped tables
@@ -230,19 +176,6 @@ INSERT INTO `users` (`ID`, `Username`, `DisplayName`, `Email`, `Password`, `Salt
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `ID` (`ID`);
-
---
--- Indexes for table `tasks`
---
-ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`taskID`);
-
---
--- Indexes for table `trans`
---
-ALTER TABLE `trans`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `code` (`code`) USING BTREE;
 
 --
 -- Indexes for table `users`
@@ -263,22 +196,10 @@ ALTER TABLE `employee`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `tasks`
---
-ALTER TABLE `tasks`
-  MODIFY `taskID` int(255) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `trans`
---
-ALTER TABLE `trans`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
-
---
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
