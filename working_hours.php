@@ -28,7 +28,7 @@
     <!-- Start Header Section -->
     <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="./timer.php">
                 <img src="./images/icon1.png" alt="Logo">
                 HCMS
             </a>

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2022 at 12:56 AM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: Sep 10, 2022 at 03:49 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -136,23 +135,6 @@ CREATE TABLE `lkp_status` (
 -- --------------------------------------------------------
 
 --
--- Stand-in structure for view `sabry2`
--- (See below for the actual view)
---
-CREATE TABLE `sabry2` (
-`NAME` varchar(255)
-,`Emp_Code` int(20)
-,`break` datetime
-,`endbreak` datetime
-,`Net_Break` time
-,`timein` datetime
-,`timeout` datetime
-,`Total_Working_Time` time
-);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tasks`
 --
 
@@ -169,18 +151,6 @@ CREATE TABLE `tasks` (
   `deadLine` datetime DEFAULT NULL,
   `status` int(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tasks`
---
-
-INSERT INTO `tasks` (`taskID`, `userTo`, `userIdTo`, `leaderaName`, `leaderaID`, `taskContent`, `taskTitle`, `createdAt`, `startIn`, `deadLine`, `status`) VALUES
-(1, 'tarek', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '0000-00-00 00:00:00', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0),
-(2, 'tarek', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '2022-09-11 11:58:24', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0),
-(3, 'tarek', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '2022-09-11 14:01:27', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0),
-(4, 'tarek', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '2022-09-11 14:01:28', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0),
-(5, 'tarek', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '2022-09-11 14:01:28', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0),
-(6, 'hosnyx', 0, 'admin', 300, 'fsdfsdf', 'sdfsd', '2022-09-11 14:03:32', '2022-09-08 00:00:00', '2022-09-07 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -207,12 +177,8 @@ CREATE TABLE `trans` (
 --
 
 INSERT INTO `trans` (`id`, `name`, `code`, `timein`, `timeout`, `break`, `workingon`, `total`, `status`, `endbreak`) VALUES
-(196, 'admin', 155, '2022-09-10 13:05:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', NULL, 0, '0000-00-00 00:00:00'),
-(203, 'tarekahmed', 300, '2022-10-21 23:15:45', '2022-10-21 23:17:40', '2022-10-21 23:16:13', '', NULL, NULL, '2022-10-21 23:16:39'),
-(204, 'tarekahmed', 300, '2022-10-18 23:15:45', '2022-10-18 23:17:40', '2022-10-18 23:16:13', '', NULL, NULL, '2022-10-21 23:16:39'),
-(205, 'sabry', 299, '2022-10-19 09:29:22', '2022-10-19 17:29:22', '2022-10-19 13:00:22', '0', NULL, 0, '2022-10-19 14:29:22'),
-(206, 'tarekahmed', 300, '2022-10-21 23:27:19', NULL, NULL, '', NULL, NULL, NULL),
-(207, 'momen', 500, '2022-10-21 23:35:52', '2022-10-21 23:38:05', '2022-10-21 23:37:02', '0', NULL, 0, '2022-10-21 23:37:22');
+(195, 'tarekahmed', 300, '2022-09-10 11:08:20', '2022-09-10 11:09:08', '2022-09-10 11:09:01', '0', NULL, 0, '2022-09-10 12:11:25'),
+(196, 'admin', 155, '2022-09-10 13:05:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', NULL, 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -245,23 +211,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `Username`, `DisplayName`, `Email`, `Password`, `SaltID`, `IsDeleted`, `isAdmin`, `IsActive`, `CreatedBy`, `CreatedDate`, `UpdatedBy`, `UpdatedDate`, `EmployeeID`, `IsLeader`, `leadername`) VALUES
 (39, 'Ahmed3', 'AhmedTest', 'ahmed@ahmed.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 1, 1, 1, 39, '2022-08-12 07:03:56pm', NULL, NULL, 123, NULL, NULL),
-(41, 'Hosnyx', 'Hosny', 'Hosny00@d.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 0, 1, 39, '2022-08-12 08:02:25pm', NULL, NULL, 122, 1, 'admin'),
+(41, 'Hosnyx', 'Hosny', 'Hosny00@d.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 0, 1, 39, '2022-08-12 08:02:25pm', NULL, NULL, 122, 1, NULL),
 (124, 'tarek', 'tarekahmed', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 41, '2022-08-27 10:38:26am', NULL, NULL, 300, 1, 'admin'),
 (125, 'admin', 'admin', 'tarekahmed2020@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 124, '2022-09-06 04:32:18pm', NULL, NULL, 155, 1, NULL),
 (158, 'tarek', '', '', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 0, 0, 125, '2022-09-10 01:37:25pm', NULL, NULL, 0, 0, '2'),
 (159, 'leader', 'boda', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:38:04pm', NULL, NULL, 1233, 1, '2'),
-(162, 'tarekx', 'tarekx', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:41:17pm', NULL, NULL, 0, 1, 'Hosnyx'),
-(163, 'sabry', 'sabry', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 124, '2022-10-04 11:28:40pm', NULL, NULL, 299, 0, 'Open this select menu'),
-(164, 'momen', 'momen', 'momen@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 124, '2022-10-21 11:35:26pm', NULL, NULL, 500, 1, 'Open this select menu');
-
--- --------------------------------------------------------
-
---
--- Structure for view `sabry2`
---
-DROP TABLE IF EXISTS `sabry2`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `sabry2`  AS  select (select `u`.`DisplayName` from `users` `u` where `u`.`EmployeeID` = `t`.`code`) AS `NAME`,`t`.`code` AS `Emp_Code`,`t`.`break` AS `break`,`t`.`endbreak` AS `endbreak`,timediff(`t`.`endbreak`,`t`.`break`) AS `Net_Break`,`t`.`timein` AS `timein`,`t`.`timeout` AS `timeout`,timediff(`t`.`timeout`,`t`.`timein`) AS `Total_Working_Time` from `trans` `t` ;
+(160, 'leader', 'boda', 'tarekahmed1568@gmail.com', 'd1dea2317205115223634dfd2b7219ae', NULL, 0, 1, 1, 125, '2022-09-10 01:39:19pm', NULL, NULL, 1233, 1, '2'),
+(161, 'tarekx', 'tarekx', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:40:20pm', NULL, NULL, 0, 1, 'Hosnyx'),
+(162, 'tarekx', 'tarekx', 'tarekahmed1568@gmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, 0, 1, 1, 125, '2022-09-10 01:41:17pm', NULL, NULL, 0, 1, 'Hosnyx');
 
 --
 -- Indexes for dumped tables
@@ -309,19 +266,19 @@ ALTER TABLE `employee`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `taskID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `taskID` int(255) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `trans`
 --
 ALTER TABLE `trans`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

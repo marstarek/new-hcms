@@ -33,7 +33,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     $checkQuery = "select CASE WHEN HOUR(timediff(sysdate(),timein)) >= '18' THEN 'Passed' ELSE 'NotPassed' END AS checkResult FROM trans WHERE code = $ffl order by id desc limit 1;";
     $checkQueryExecute = mysqli_query($conn, $checkQuery);
     $checkQueryFetch = mysqli_fetch_assoc($checkQueryExecute);
-    // var_dump($checkQueryFetch);
+    // var_dump($checkQuery);
     // exit();
     $idquery = "SELECT id  FROM `trans` WHERE  code = $ffl ORDER BY ID DESC LIMIT 1";
     $idresult = mysqli_query($conn, $idquery);
@@ -105,7 +105,7 @@ if ($row = mysqli_fetch_assoc($result)) {
     exit();
 } else {
 
-    echo 'error';
+    // echo 'error';
 }
 
 mysqli_free_result($result);
@@ -130,7 +130,7 @@ mysqli_close($conn);
 
 <body>
     <?php if (isset($error)) {
-        echo $error;
+        // echo $error;
     } ?>
 
 
@@ -139,7 +139,7 @@ mysqli_close($conn);
         <div class="container p-5 ">
             <div class="text-center" style="border-radius: .6875rem;margin: 0 auto;width: 40%;padding: 1.875rem;box-shadow: rgba(0, 0, 0, 0.2) 0rem 1.125rem 3.125rem -0.625rem;">
                 <div class="  d-flex justify-content-center  align-items-center flex-column">
-                    <!-- <img src="./images/1597256885097.jfif" alt=""> -->
+                    <img src="./images/1597256885097.jfif" alt="">
                 </div>
 
                 <form action="login.php" method="Post" class="text-center">

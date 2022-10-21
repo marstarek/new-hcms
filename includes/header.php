@@ -4,8 +4,8 @@
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <!-- <a class="navbar-brand" href="#"> <img src="./images/icon1.png" style="    width: 125px;
-      border-radius: 5px;" alt=""></a> -->
+        <a class="navbar-brand" href="#"> <img src="./images/icon1.png" style="    width: 125px;
+      border-radius: 5px;" alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,8 @@
                         <li><a class="dropdown-item" href="./addEmployee.php">Add Emp</a></li>
                         <li><a class="dropdown-item" href="./request.php">requests</a> </li>
                         <li><a class="dropdown-item" href="./reporte.php">Reports</a> </li>
+                        <li><a class="dropdown-item" href="./working_hours.php">W_H Report</a> </li>
+                        <li><a class="dropdown-item" href="./hierarchy.php">hierarchy</a> </li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown bg-dark">
